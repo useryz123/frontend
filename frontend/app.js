@@ -7,7 +7,7 @@ const API_BASE_URL = (() => {
     return 'http://localhost:8000';
   }
   // 生产环境：你的 Railway 地址
-  return 'https://backend-production-5537.up.railway.app/'; // 替换为你的实际地址
+  return 'https://backend-production-5537.up.railway.app'; // 替换为你的实际地址
 })();
 
 let currentUser = null;
