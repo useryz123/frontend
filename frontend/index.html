@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 我的待办清单</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 认证界面 -->
+        <div id="auth" class="auth-section">
+            <h1><i class="fas fa-tasks"></i> 我的待办清单</h1>
+            
+            <div id="login-form">
+                <h2>登录</h2>
+                <input type="text" id="login-username" placeholder="用户名" class="input-field">
+                <input type="password" id="login-password" placeholder="密码" class="input-field">
+                <button onclick="login()" class="btn btn-login">登录</button>
+                <p class="switch-text">还没有账号？ <a href="#" onclick="showRegister()">点此注册</a></p>
+            </div>
+            
+            <div id="register-form" style="display:none;">
+                <h2>注册</h2>
+                <input type="text" id="register-username" placeholder="用户名" class="input-field">
+                <input type="email" id="register-email" placeholder="邮箱" class="input-field">
+                <input type="password" id="register-password" placeholder="密码" class="input-field">
+                <button onclick="register()" class="btn btn-register">注册</button>
+                <p class="switch-text">已有账号？ <a href="#" onclick="showLogin()">点此登录</a></p>
+            </div>
+        </div>
+
+        <!-- 主应用界面 -->
+        <div id="app" class="app-section" style="display:none;">
+            <!-- 顶部栏 -->
+            <div class="header">
+                <h1><i class="fas fa-tasks"></i> 我的待办清单</h1>
+                <div class="user-info">
+                    <span id="current-user">用户</span>
+                    <button onclick="logout()" class="btn-logout">退出</button>
+                </div>
+            </div>
+
+            <!-- 添加新待办 -->
+            <div class="add-todo">
+                <h3><i class="fas fa-plus"></i> 添加新事项</h3>
+                <input type="text" id="new-todo-title" placeholder="输入待办事项..." class="todo-input">
+                <textarea id="new-todo-desc" placeholder="描述（可选）..." rows="2"></textarea>
+                <div class="priority-buttons">
+                    <button onclick="setPriority(1)" class="priority-btn" data-priority="1">低</button>
+                    <button onclick="setPriority(2)" class="priority-btn active" data-priority="2">中</button>
+                    <button onclick="setPriority(3)" class="priority-btn" data-priority="3">高</button>
+                </div>
+                <button onclick="addTodo()" class="btn btn-add">添加</button>
+            </div>
+
+            <!-- 统计 -->
+            <div class="stats">
+                <div class="stat-item">
+                    <i class="fas fa-list"></i>
+                    <span>总计: <span id="total-count">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>已完成: <span id="completed-count">0</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <span>待办: <span id="pending-count">0</span></span>
+                </div>
+            </div>
+
+            <!-- 待办事项列表 -->
+            <div class="todos-container">
+                <h3><i class="fas fa-list-check"></i> 我的待办事项</h3>
+                <div id="todos-list" class="todos-list">
+                    <!-- 动态加载待办事项 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
