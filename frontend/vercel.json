@@ -1,26 +1,49 @@
 {
   "version": 2,
+  "name": "your-project-name",
+  "alias": ["your-domain.com"],
+  "public": true,
+  "regions": ["iad1"],
   "builds": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "https://your-backend.railway.app/api/$1"
+    },
+    {
+      "src": "/((?!.*\\.(css|js|png|jpg|ico|json|txt|xml|webmanifest)$).*)",
       "dest": "/index.html"
     }
   ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_API_URL": "https://your-api.vercel.app"
     }
-  ]
+  },
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 10,
+      "memory": 1024
+    }
+  },
+  "github": {
+    "silent": true
+  }
 }
