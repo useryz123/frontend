@@ -1,5 +1,15 @@
 // 配置
-const API_BASE_URL = 'http://localhost:8000';
+// 在 app.js 开头部分，找到或添加：
+const API_BASE_URL = (() => {
+  // 如果是本地开发
+  if (window.location.hostname === 'localhost' || 
+      window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:8000';
+  }
+  // 生产环境：你的 Railway 地址
+  return 'https://backend-production-5537.up.railway.app/'; // 替换为你的实际地址
+})();
+
 let currentUser = null;
 let currentToken = null;
 let currentPriority = 2; // 默认中等优先级
